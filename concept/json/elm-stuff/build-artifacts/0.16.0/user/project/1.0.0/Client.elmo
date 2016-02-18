@@ -1,0 +1,33 @@
+Elm.Client = Elm.Client || {};
+Elm.Client.make = function (_elm) {
+   "use strict";
+   _elm.Client = _elm.Client || {};
+   if (_elm.Client.values) return _elm.Client.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var y = A2($Json$Decode._op[":="],"y",$Json$Decode.$int);
+   var x = A2($Json$Decode._op[":="],"x",$Json$Decode.$int);
+   var coordinate = A3($Json$Decode.tuple2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),x,y);
+   var jsonString = "{ \"x\": 2, \"x\":4 }";
+   var elmJson = A2($Json$Decode.decodeString,coordinate,jsonString);
+   var parsedJson = A2($Result.withDefault,{ctor: "_Tuple2",_0: 0,_1: 0},elmJson);
+   var stringJson = $Basics.toString(parsedJson);
+   var main = $Html.text(stringJson);
+   return _elm.Client.values = {_op: _op
+                               ,jsonString: jsonString
+                               ,x: x
+                               ,y: y
+                               ,coordinate: coordinate
+                               ,elmJson: elmJson
+                               ,parsedJson: parsedJson
+                               ,stringJson: stringJson
+                               ,main: main};
+};

@@ -1,0 +1,22 @@
+Elm.Client = Elm.Client || {};
+Elm.Client.make = function (_elm) {
+   "use strict";
+   _elm.Client = _elm.Client || {};
+   if (_elm.Client.values) return _elm.Client.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var value = Elm.Native.Port.make(_elm).inboundSignal("value",
+   "Int",
+   function (v) {
+      return typeof v === "number" && isFinite(v) && Math.floor(v) === v ? v : _U.badPort("an integer",v);
+   });
+   var main = A2($Signal.map,$Html.text,A2($Signal.map,$Basics.toString,value));
+   return _elm.Client.values = {_op: _op,main: main};
+};
